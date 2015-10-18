@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         let defaultAction = UIAlertAction(title: "Ok",
             style: UIAlertActionStyle.Default,
             handler: {(alertAction: UIAlertAction) in
-                let emailAddress: String = (alertController.textFields![0] as! UITextField).text!
+                let emailAddress = (alertController.textFields?[0])!.text!
                 self.userOutput.text="Entered '\(emailAddress)'"
         })
         
@@ -142,6 +142,54 @@ class ViewController: UIViewController {
     @IBAction func doVibration(sender: AnyObject) {
         AudioServicesPlaySystemSound(UInt32(kSystemSoundID_Vibrate))
     }
+    
+    
+    @IBAction func doLoginAlert(sender: AnyObject) {
+        let alert = UIAlertController(title: "Please Log In", message: "Enter username and password", preferredStyle: UIAlertControllerStyle.Alert)
+ 
+        alert.addTextFieldWithConfigurationHandler {
+            (textFieldName: UITextField!) in
+            textFieldName.placeholder = "Enter username"
+            textFieldName.keyboardType=UIKeyboardType.Default
+        }
+        alert.addTextFieldWithConfigurationHandler {
+            (textFieldPass: UITextField!) in
+            textFieldPass.placeholder = "Enter Password"
+            textFieldPass.keyboardType=UIKeyboardType.Default
+            
+        }
+            let okAction = UIAlertAction(title: "Submit", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in
+                let user = (alert.textFields?[0])!.text!
+                self.userOutput.text="Username: '\(user)'"
+            }
+        okAction.enabled = false
+            
+        let textFieldValidationObserver: (NSNotification!) -> Void = { _ in
+            let textFieldName = alert.textFields![0] 
+            let textFieldpass = alert.textFields![1] 
+            okAction.enabled = (textFieldpass.text?.isEmpty != true && textFieldName.text?.isEmpty != true)
+        }
+        
+        // Notifications for textFieldName changes
+        NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification,
+            object: alert.textFields![0],  // textFieldName
+            queue: NSOperationQueue.mainQueue(), usingBlock: textFieldValidationObserver)
+        
+        // Notifications for textFieldEmail changes
+        NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification,
+            object: alert.textFields![1],  // textFieldEmail
+            queue: NSOperationQueue.mainQueue(), usingBlock: textFieldValidationObserver)
+        
+       
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(okAction)
+            
+        
+        presentViewController(alert, animated: true, completion: nil)
+        
+        
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
