@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var userOutput: UILabel!
     
     @IBAction func doAlert(sender: AnyObject) {
+        AudioServicesPlaySystemSound(1016)
         let alertController = UIAlertController(title: "Alert Me Button Selected",
             message: "I need your attention NOW!",
             preferredStyle: UIAlertControllerStyle.Alert)
@@ -28,6 +29,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func doMultiButtonAlert(sender: AnyObject) {
+        AudioServicesPlaySystemSound(1108)
         let alertController = UIAlertController(title: "Alert with Buttons Selected",
             message: "Options are good for people!",
             preferredStyle: UIAlertControllerStyle.Alert)
@@ -58,6 +60,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func doAlertInput(sender: AnyObject) {
+        AudioServicesPlaySystemSound(1057)
         let alertController = UIAlertController(title: "Email Address",
             message: "Please enter your email address below:",
             preferredStyle: UIAlertControllerStyle.Alert)
@@ -79,6 +82,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func doActionSheet(sender: AnyObject) {
+        AudioServicesPlaySystemSound(1105)
         let alertController = UIAlertController(title: "Available Actions",
             message: "Choose something from this list",
             preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -130,6 +134,7 @@ class ViewController: UIViewController {
         AudioServicesPlaySystemSound(soundID)
     }
     
+    
     @IBAction func doAlertSound(sender: AnyObject) {
         var soundID: SystemSoundID = 0
         let soundFile: String = NSBundle.mainBundle().pathForResource("alertsound", ofType: "wav")!
@@ -145,6 +150,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func doLoginAlert(sender: AnyObject) {
+        AudioServicesPlaySystemSound(1103)
         let alert = UIAlertController(title: "Please Log In", message: "Enter username and password", preferredStyle: UIAlertControllerStyle.Alert)
  
         alert.addTextFieldWithConfigurationHandler {
@@ -152,41 +158,48 @@ class ViewController: UIViewController {
             textFieldName.placeholder = "Enter username"
             textFieldName.keyboardType=UIKeyboardType.Default
         }
+        
         alert.addTextFieldWithConfigurationHandler {
             (textFieldPass: UITextField!) in
             textFieldPass.placeholder = "Enter Password"
             textFieldPass.keyboardType=UIKeyboardType.Default
+            textFieldPass.secureTextEntry=true
             
         }
-            let okAction = UIAlertAction(title: "Submit", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in
-                let user = (alert.textFields?[0])!.text!
-                self.userOutput.text="Username: '\(user)'"
-            }
+        
+        let okAction = UIAlertAction(title: "Submit", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in
+            let user = (alert.textFields?[0])!.text!
+            self.userOutput.text="Username: '\(user)'"
+            AudioServicesPlaySystemSound(1054)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {(alertAction: UIAlertAction) in
+            AudioServicesPlaySystemSound(1053)
+        })
+        
         okAction.enabled = false
-            
+        
+        // Checks that text fields are not empty before allowing submit
         let textFieldValidationObserver: (NSNotification!) -> Void = { _ in
             let textFieldName = alert.textFields![0] 
             let textFieldpass = alert.textFields![1] 
             okAction.enabled = (textFieldpass.text?.isEmpty != true && textFieldName.text?.isEmpty != true)
         }
         
-        // Notifications for textFieldName changes
+        // Notifications for username text changes
         NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification,
             object: alert.textFields![0],  // textFieldName
             queue: NSOperationQueue.mainQueue(), usingBlock: textFieldValidationObserver)
         
-        // Notifications for textFieldEmail changes
+        // Notifications for password text changes
         NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification,
             object: alert.textFields![1],  // textFieldEmail
             queue: NSOperationQueue.mainQueue(), usingBlock: textFieldValidationObserver)
         
-       
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(cancelAction)
         alert.addAction(okAction)
-            
         
         presentViewController(alert, animated: true, completion: nil)
-        
         
     }
 
