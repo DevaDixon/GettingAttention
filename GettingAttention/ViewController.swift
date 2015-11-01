@@ -148,7 +148,7 @@ class ViewController: UIViewController {
         AudioServicesPlaySystemSound(UInt32(kSystemSoundID_Vibrate))
     }
     
-    
+    /*
     @IBAction func doLoginAlert(sender: AnyObject) {
         AudioServicesPlaySystemSound(1103)
         let alert = UIAlertController(title: "Please Log In", message: "Enter username and password", preferredStyle: UIAlertControllerStyle.Alert)
@@ -203,7 +203,10 @@ class ViewController: UIViewController {
         
     }
 
-    
+    */
+    @IBAction func exitToHere(sender: UIStoryboardSegue) {
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

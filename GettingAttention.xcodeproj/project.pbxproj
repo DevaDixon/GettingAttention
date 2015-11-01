@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5961B7E01BE19E00009D1E78 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5961B7DF1BE19E00009D1E78 /* LogInViewController.swift */; };
 		598D8E3E1BCEF3510075AAE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D8E3D1BCEF3510075AAE2 /* AppDelegate.swift */; };
 		598D8E401BCEF3510075AAE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D8E3F1BCEF3510075AAE2 /* ViewController.swift */; };
 		598D8E431BCEF3510075AAE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 598D8E411BCEF3510075AAE2 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5961B7DF1BE19E00009D1E78 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		598D8E381BCEF3510075AAE2 /* GettingAttention.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GettingAttention.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		598D8E3C1BCEF3510075AAE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		598D8E3D1BCEF3510075AAE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				598D8E3D1BCEF3510075AAE2 /* AppDelegate.swift */,
 				598D8E3F1BCEF3510075AAE2 /* ViewController.swift */,
 				598D8E411BCEF3510075AAE2 /* Main.storyboard */,
+				5961B7DF1BE19E00009D1E78 /* LogInViewController.swift */,
 				598D8E441BCEF3510075AAE2 /* Images.xcassets */,
 				598D8E461BCEF3510075AAE2 /* LaunchScreen.xib */,
 				598D8E5D1BCEF3AF0075AAE2 /* Sounds */,
@@ -232,6 +235,7 @@
 			files = (
 				598D8E401BCEF3510075AAE2 /* ViewController.swift in Sources */,
 				598D8E3E1BCEF3510075AAE2 /* AppDelegate.swift in Sources */,
+				5961B7E01BE19E00009D1E78 /* LogInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +367,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.ccbcmd.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -374,6 +379,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.ccbcmd.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
